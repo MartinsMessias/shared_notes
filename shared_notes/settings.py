@@ -23,6 +23,7 @@ INSTALLED_APPS = ['django.contrib.admin',
                   'django.contrib.messages',
                   'django.contrib.staticfiles',
                   'register.apps.RegisterConfig',
+                  'notes.apps.NotesConfig',
                   ]
 
 MIDDLEWARE = [
@@ -118,4 +119,12 @@ MEDIA_ROOT = os.path.join(
 
 
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'Shared Notes <messiaslabs@gmail.com>'
