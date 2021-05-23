@@ -1,5 +1,11 @@
-{#{% extends 'base.html' %}#}
+{% extends 'registration/base.html' %}
+{% load static %}
 
 {% block content %}
-  <p>The confirmation link was invalid, possibly because it has already been used.</p>
+    <h2 class="ui teal header">
+        <div class="content">
+            The confirmation link was invalid, possibly because it has already been used.
+        </div>
+    </h2>
+    <a href="{% url 'login' %}" class="ui fluid large teal submit button">Login</a>
 {% endblock %}

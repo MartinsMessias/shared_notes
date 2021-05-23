@@ -1,5 +1,12 @@
-{#{% extends 'base.html' %}#}
+{% extends 'registration/base.html' %}
+{% load static %}
 
 {% block content %}
-  <p>Please confirm your email address to complete the registration. </p>
+    <h2 class="ui teal header">
+        <div class="content">
+            Please confirm your email address to complete the registration.
+        </div>
+    </h2>
+    <h5 class="content">If you do not receive an email, make sure you have entered the address with which you registered, and check your spam folder.</h5>
+    <a href="{% url 'login' %}" class="ui fluid large teal submit button">Login</a>
 {% endblock %}

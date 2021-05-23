@@ -3,7 +3,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from .tokens import account_activation_token
 from .forms import RegisterForm
 from django.contrib.auth.models import User
@@ -35,14 +35,14 @@ def register(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            subject = 'Activate Your MySite Account'
+            subject = 'Shared Notes - Activate your account'
             message = render_to_string('registration/account_activation_email.html', {
                 'user': user,
+                'protocol': 'https' if request.is_secure() else "http",
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
-            print("Send email", message)
             user.email_user(subject, message)
             return redirect('account_activation_sent')
 

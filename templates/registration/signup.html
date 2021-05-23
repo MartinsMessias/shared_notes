@@ -1,11 +1,69 @@
-{#{% extends 'base.html' %}#}
-
-{% block title %}Create an Account{% endblock %}
+{% extends 'registration/base.html' %}
+{% load static %}
 
 {% block content %}
-    <form method="post">
+    <h2 class="ui teal header">
+        <div class="content">
+            Create account
+        </div>
+    </h2>
+    <form class="ui middle form" method="post">
         {% csrf_token %}
-        {{ form }}
-        <button type="submit">Register</button>
+        <div class="ui stacked segment">
+            <div class="field">
+                <label>First name</label>
+                <div class="ui left input center">
+                    {{ form.first_name }}
+                </div>
+            </div>
+            <div class="field">
+                <label>Last name</label>
+                <div class="ui left input">
+                    {{ form.last_name }}
+                </div>
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <div class="ui left input">
+                    {{ form.email }}
+                </div>
+            </div>
+            <div class="field">
+                <label>Username</label>
+                <div class="ui left input">
+                    {{ form.username }}
+                </div>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <div class="ui left input">
+                    {{ form.password1 }}
+                </div>
+            </div>
+            <div class="field">
+                <label >Confirm password</label>
+                <div class="ui left input">
+                    {{ form.password2 }}
+                </div>
+            </div>
+            <button type="submit" class="ui fluid large teal submit button">Join</button>
+        </div>
     </form>
-{% endblock %}
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="ui error message">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="ui error message">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="ui message">
+        Already have a registration? <a href="{% url 'login' %}">Log in </a>
+    </div>
+{% endblock content %}
