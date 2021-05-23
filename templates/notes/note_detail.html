@@ -1,9 +1,25 @@
 {% extends 'notes/base.html' %}
-
 {% block content %}
-<div style="text-align: center;"><b><u><h1>NOTE DETAIL</h1></u></b>
-<h1>Title: {{object.title}}</h1>
-<h1>Content: {{object.content}}</h1></div>
-<h1>Author: {{object.created_by}}</h1>
-    <h1>Date: {{object.created_date}}</h1>
-{% endblock content %}
+    <div class="ui text container">
+        <h1 class="ui inverted header">
+            {{ object.title }}
+        </h1>
+        <h2>{{ object.content }}</h2>
+        <div>Created by: {{ object.created_by }} on {{ object.modify_date | date }}</div>
+        <br/><br/><br/><br/>
+        <div class="ui icon buttons tiny">
+            <a href="{% url 'list_notes' %}" class="ui button">
+                Back
+                <i class="arrow left icon"></i>
+            </a>
+            <a href="{% url 'update_note' object.pk %}" class="ui button teal">
+                Update
+                <i class="pencil icon"></i>
+            </a>
+            <a href="{% url 'delete_note' object.pk %}" class="ui button red" data-toggle="modal">
+                Delete
+                <i class="trash icon"></i>
+            </a>
+        </div>
+    </div>
+{% endblock %}

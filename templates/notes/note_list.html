@@ -1,14 +1,31 @@
 {% extends 'notes/base.html' %}
-
 {% block content %}
-<div style="text-align: center;"><h1><b><u> COUNTER LIST </b></u></h1></div><br>
-{% for note in object_list %}
-<div style="text-align: center;"><h1>{{ note.title}}     ------><strong>{{ note.count}}
-	<a href="{% url 'detail_note' note.pk %}"> Detail</a>
-	<a href="{% url 'update_note' note.pk %}"> Update</a>
-	<a href="{% url 'delete_note' note.pk %}"> Delete</a></strong>
-	</h1></div>
-
-{% endfor %}
-<div style="text-align: center;"><a href="{% url 'create_note' %}"><input type = "button" value = "Create Note"></a></div>
+    <div class="ui text container">
+        <h1 class="ui inverted header">
+            My notes
+        </h1>
+        <table class="ui single line table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date modified</th>
+                <th>Likes</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for note in object_list %}
+                <tr>
+                    <td><a href="{% url 'detail_note' note.pk %}">{{ note.title }}</a></td>
+                    <td>{{ note.modify_date }}</td>
+                    <td>15</td>
+                    <td>
+                    <a href="{% url 'update_note' note.pk %}"> Update</a>
+                    <a href="{% url 'delete_note' note.pk %}"> Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}

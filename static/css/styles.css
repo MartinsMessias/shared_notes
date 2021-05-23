@@ -1,5 +1,10 @@
 body {
-    background-color: #DADADA;
+    background-color: #1b1c1d !important;
+    background: rgba(0, 0, 0, .5) url("https://tiquality.com.br/wp-content/uploads/2015/07/Gray-plain-website-background.jpg") no-repeat fixed center center !important;
+  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 body > .grid {
@@ -13,7 +18,6 @@ body > .grid {
 .column {
     max-width: 450px;
 }
-
 
 @media (min-height: 320px) {
   .ui.footer.form-page { /* Increased specificity for SO snippet priority */

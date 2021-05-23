@@ -31,6 +31,7 @@ class NoteUpdateView(UpdateView):
     def get_queryset(self):
         return self.model.objects.filter(created_by=self.request.user)
 
+
 class NoteDetailView(DetailView):
     login_required = True
     model = Note
@@ -42,6 +43,7 @@ class NoteDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(NoteDetailView, self).get_context_data(**kwargs)
         return context
+
 
 class NoteDeleteView(DeleteView):
     login_required = True

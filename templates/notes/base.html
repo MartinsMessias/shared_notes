@@ -1,11 +1,80 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}" />
+    <title>Shared Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="{% static 'css/notes.css' %}">
 </head>
 <body>
-    {% block content %}
-    {% endblock %}
+<!-- Following Menu -->
+<div class="ui large top fixed hidden menu">
+    <div class="ui container">
+        <a class="active item">Home</a>
+        <a class="item">Work</a>
+        <a class="item">Company</a>
+        <a class="item">Careers</a>
+        <div class="right menu">
+            <div class="item">
+                <a class="ui button">Log in</a>
+            </div>
+            <div class="item">
+                <a class="ui primary button">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sidebar Menu -->
+<div class="ui vertical inverted sidebar menu">
+    <a class="active item">Home</a>
+    <a class="item">Work</a>
+    <a class="item">Company</a>
+    <a class="item">Careers</a>
+    <a class="item">Login</a>
+    <a class="item">Signup</a>
+</div>
+<!-- Page Contents -->
+<div class="pusher">
+    <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui container">
+            <div class="ui large secondary inverted pointing menu toggle">
+                <a class="toc item">
+                    <i class="sidebar icon"></i>
+                </a>
+                <a href="{% url 'get_note' %}" class="active item">Notes</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'list_notes' %}" class="item">My notes</a>
+                    <div class="right item">
+                        Hi {{ user.username }},
+                        <a href="{% url 'logout' %}" class="ui inverted button">Logout</a>
+                    </div>
+                {% else %}
+                    <div class="right item">
+                        <a href="{% url 'login' %}" class="ui inverted button">Log in</a>
+                        <a href="{% url 'register' %}" class="ui inverted button">Sign Up</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+        integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $('.ui.basic.modal')
+  .modal('show')
+;
+
+
+</script>
+<script src="{% static 'js/state.js' %}"></script>
 </body>
 </html>

@@ -1,5 +1,23 @@
-<div style="text-align: center;"><h1><form method="post">
-	{% csrf_token %}
-	<p> Are you sure want to delete "{{ object }}"</p>
-	<input type="submit" value="Confirm">
-</form></h1></div>
+{% extends 'notes/base.html' %}
+{% block content %}
+<form class="ui basic form" method="post">
+    {% csrf_token %}
+  <div class="ui icon header red">
+    <i class="archive icon"></i>
+      <h1>Remove note</h1>
+  </div>
+  <div class="content">
+    <h2>Are you sure want to delete?</h2>
+  </div>
+  <div class="actions">
+    <a href="{% url 'list_notes' %}" class="ui red basic cancel inverted button">
+      <i class="remove icon"></i>
+      No
+    </a>
+    <button type="submit" class="ui green ok inverted button ">
+      <i class="checkmark icon"></i>
+      Yes
+    </button>
+  </div>
+</form>
+{% endblock %}
