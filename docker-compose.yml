@@ -1,0 +1,24 @@
+# Versão do yml
+version: "3.3"
+
+
+services:
+  web:
+    build: . # Faz o build do Dockerfile (que está no diretório atual por isso o ".")
+    command: python manage.py runserver 0.0.0.0:8000 # Executa esse comando
+    volumes:
+      - .:/code # Sincroniza os arquivos locais com os do Docker
+    ports:
+      - 8000:8000 # Faz o expose das portas
+    depends_on:
+      - db     # Esse serviço depende do serviço "db"
+  db:
+    image: postgres:latest  # Define a imagem que vai ser usada no db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
